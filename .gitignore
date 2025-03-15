@@ -1,0 +1,35 @@
+# Data and model artifacts (hashes live in data/manifest.json)
+data/raw/
+data/processed/
+data/features/
+artifacts/
+mlruns/
+reports/*/gold_sheet.csv
+*.parquet
+*.part
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.hypothesis/
+.coverage
+htmlcov/
+*.egg-info/
+dist/
+build/
+
+# Secrets and local config
+.env
+.env.local
+*.pem
+kaggle.json
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
