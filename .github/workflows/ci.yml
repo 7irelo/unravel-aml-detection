@@ -1,0 +1,19 @@
+name: CI
+on:
+  push:
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          version: "0.11.23"
+      - run: uv sync --all-extras --python 3.12 --index https://download.pytorch.org/whl/cpu --index-strategy unsafe-best-match
+      # No data, GPU, broker or LLM key: CI uses the synthetic fixture and a scripted client.
+      - run: uv run ruff check src tests apps
+      - run: uv run mypy
+      - run: uv run pytest -m "not integration and not live_llm and not real_data"

@@ -1,0 +1,12 @@
+data
+artifacts
+reports
+.venv
+.git
+**/__pycache__
+.pytest_cache
+.ruff_cache
+.mypy_cache
+.hypothesis
+docs
+tests

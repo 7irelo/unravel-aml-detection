@@ -1,0 +1,155 @@
+# Profiles: core (pipeline), agent (cases and review), obs (monitoring), demo (all of it).
+# `make demo` runs the full flow on the synthetic fixture with no credentials.
+name: unravel
+
+x-app: &app
+  build:
+    context: ..
+    dockerfile: deploy/Dockerfile
+  image: unravel:local
+  environment: &env
+    UNRAVEL_DATABASE_URL: postgresql://unravel:unravel_local@postgres:5432/unravel
+    UNRAVEL_AGENT_DATABASE_URL: postgresql://unravel_agent:agent_read_only_local@postgres:5432/unravel
+    UNRAVEL_KAFKA_BOOTSTRAP: redpanda:9092
+    UNRAVEL_LLM: ${UNRAVEL_LLM:-scripted}
+    UNRAVEL_LLM_BUDGET_USD: ${UNRAVEL_LLM_BUDGET_USD:-25}
+    UNRAVEL_CAPACITY_PER_DAY: ${UNRAVEL_CAPACITY_PER_DAY:-100}
+    UNRAVEL_DATASET: ${UNRAVEL_DATASET:-fixture}
+    ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+  volumes:
+    - ../data:/app/data
+    - ../artifacts:/app/artifacts
+  restart: "no"
+
+services:
+  redpanda:
+    image: docker.redpanda.com/redpandadata/redpanda:v24.2.7
+    profiles: [core, agent, demo]
+    command:
+      - redpanda start --smp 1 --memory 1G --overprovisioned --node-id 0
+      - --kafka-addr internal://0.0.0.0:9092,external://0.0.0.0:19092
+      - --advertise-kafka-addr internal://redpanda:9092,external://localhost:19092
+    ports: ["19092:19092"]
+    healthcheck:
+      test: ["CMD-SHELL", "rpk cluster health | grep -q 'Healthy:.*true'"]
+      interval: 5s
+      timeout: 5s
+      retries: 24
+    deploy:
+      resources:
+        limits: { memory: 1500m }
+
+  console:
+    image: docker.redpanda.com/redpandadata/console:v2.7.2
+    profiles: [core, demo]
+    environment:
+      KAFKA_BROKERS: redpanda:9092
+    ports: ["8088:8080"]
+    depends_on:
+      redpanda: { condition: service_healthy }
+
+  postgres:
+    image: postgres:16-alpine
+    profiles: [core, agent, demo]
+    environment:
+      POSTGRES_DB: unravel
+      POSTGRES_USER: unravel
+      POSTGRES_PASSWORD: unravel_local
+    ports: ["55432:5432"]
+    volumes:
+      - ../migrations:/docker-entrypoint-initdb.d:ro
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U unravel -d unravel"]
+      interval: 3s
+      timeout: 3s
+      retries: 30
+
+  bootstrap:
+    <<: *app
+    profiles: [demo]
+    user: root
+    command: unravel demo-prepare
+    depends_on:
+      redpanda: { condition: service_healthy }
+      postgres: { condition: service_healthy }
+
+  replayer:
+    <<: *app
+    profiles: [core, demo]
+    command: unravel stream-replay --name ${UNRAVEL_DATASET:-fixture}
+    depends_on:
+      bootstrap: { condition: service_completed_successfully, required: false }
+      redpanda: { condition: service_healthy }
+
+  feature-consumer:
+    <<: *app
+    user: root
+    profiles: [core, demo]
+    command: unravel stream-features --name ${UNRAVEL_DATASET:-fixture}
+    depends_on:
+      bootstrap: { condition: service_completed_successfully, required: false }
+      redpanda: { condition: service_healthy }
+
+  scorer:
+    <<: *app
+    profiles: [core, demo]
+    command: unravel stream-score --name ${UNRAVEL_DATASET:-fixture} --metrics-port 9108
+    ports: ["9108:9108"]
+    depends_on:
+      bootstrap: { condition: service_completed_successfully, required: false }
+      redpanda: { condition: service_healthy }
+      postgres: { condition: service_healthy }
+
+  agent-worker:
+    <<: *app
+    profiles: [agent, demo]
+    command: unravel agent-worker
+    depends_on:
+      postgres: { condition: service_healthy }
+
+  api:
+    <<: *app
+    profiles: [agent, demo]
+    command: uvicorn unravel.api.main:app --host 0.0.0.0 --port 8000
+    ports: ["8000:8000"]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import httpx; httpx.get('http://localhost:8000/healthz').raise_for_status()"]
+      interval: 5s
+      timeout: 5s
+      retries: 24
+    depends_on:
+      postgres: { condition: service_healthy }
+
+  review-ui:
+    <<: *app
+    profiles: [agent, demo]
+    command: streamlit run apps/review_ui/app.py --server.port 8501 --server.address 0.0.0.0 --server.headless true
+    environment:
+      <<: *env
+      UNRAVEL_API_URL: http://api:8000
+      HOME: /tmp
+    ports: ["8501:8501"]
+    depends_on:
+      api: { condition: service_healthy }
+
+  prometheus:
+    image: prom/prometheus:v2.54.1
+    profiles: [obs, demo]
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports: ["9090:9090"]
+
+  grafana:
+    image: grafana/grafana:11.2.0
+    profiles: [obs, demo]
+    environment:
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Viewer
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./grafana/dashboards:/var/lib/grafana/dashboards:ro
+    ports: ["3000:3000"]
+
+volumes:
+  postgres-data:

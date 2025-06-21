@@ -1,0 +1,122 @@
+{
+  "title": "Unravel pipeline",
+  "uid": "unravel-pipeline",
+  "schemaVersion": 39,
+  "refresh": "5s",
+  "time": {
+    "from": "now-30m",
+    "to": "now"
+  },
+  "panels": [
+    {
+      "title": "Transactions scored per second",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "datasource": {
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "rate(unravel_scored_total[1m])"
+        }
+      ]
+    },
+    {
+      "title": "Alerts admitted, by risk band",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "datasource": {
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "increase(unravel_alerts_total[5m])",
+          "legendFormat": "{{band}}"
+        }
+      ]
+    },
+    {
+      "title": "Scoring batch latency, p99",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 8
+      },
+      "datasource": {
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.99, rate(unravel_score_batch_seconds_bucket[1m]))"
+        }
+      ]
+    },
+    {
+      "title": "Alert admission threshold",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 8
+      },
+      "datasource": {
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "unravel_alert_threshold"
+        }
+      ]
+    },
+    {
+      "title": "Features above their drift level",
+      "type": "stat",
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 0,
+        "y": 16
+      },
+      "datasource": {
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "unravel_features_drifting"
+        }
+      ]
+    },
+    {
+      "title": "Largest feature PSI against training",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 18,
+        "x": 6,
+        "y": 16
+      },
+      "datasource": {
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "topk(5, unravel_feature_psi)",
+          "legendFormat": "{{feature}}"
+        }
+      ]
+    }
+  ]
+}
