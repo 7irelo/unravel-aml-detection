@@ -1,0 +1,32 @@
+{"arm": "T3", "dataset": "HI-Small", "model_hash": "3752e66af07ea2b8", "protocol": "causal-tree", "reason": "final evaluation: choices fixed on validation"}
+{"arm": "T3", "dataset": "HI-Small", "model_hash": "27c79a8411bc2227", "protocol": "causal-tree", "reason": "final evaluation: choices fixed on validation"}
+{"arm": "T3", "dataset": "HI-Small", "model_hash": "3752e66af07ea2b8", "protocol": "causal-tree", "reason": "final evaluation: choices fixed on validation"}
+{"arm": "T3", "dataset": "HI-Small", "model_hash": "27c79a8411bc2227", "protocol": "causal-tree", "reason": "final evaluation: choices fixed on validation"}
+{"arm": "T3", "dataset": "HI-Small", "model_hash": "8220a4dbb526736c", "protocol": "causal-tree", "reason": "final evaluation: choices fixed on validation"}
+{"arm": "T3", "dataset": "HI-Small", "model_hash": "b081f8d48cd5ec7a", "protocol": "causal-tree", "reason": "final evaluation: choices fixed on validation"}
+{"arm": "T3", "dataset": "HI-Small", "model_hash": "1242e5697a4b9d7c", "protocol": "causal-tree", "reason": "final evaluation: choices fixed on validation"}
+{"arm": "T2", "dataset": "HI-Small", "model_hash": "1bc914b8f03c9a98", "protocol": "causal-tree", "reason": "final evaluation: choices fixed on validation"}
+{"arm": "T2", "dataset": "HI-Small", "model_hash": "7b5303cf243da1cf", "protocol": "causal-tree", "reason": "final evaluation: choices fixed on validation"}
+{"arm": "T2", "dataset": "HI-Small", "model_hash": "cbdab6076a2ef76d", "protocol": "causal-tree", "reason": "final evaluation: choices fixed on validation"}
+{"arm": "T2", "dataset": "HI-Small", "model_hash": "b6336c7ef877846b", "protocol": "causal-tree", "reason": "final evaluation: choices fixed on validation"}
+{"arm": "T2", "dataset": "HI-Small", "model_hash": "e11d86ea372a2123", "protocol": "causal-tree", "reason": "final evaluation: choices fixed on validation"}
+{"arm": "T1", "dataset": "HI-Small", "model_hash": "da19998ccd1a1342", "protocol": "causal-tree", "reason": "final evaluation: choices fixed on validation"}
+{"arm": "T1", "dataset": "HI-Small", "model_hash": "aa7f000b727c2d31", "protocol": "causal-tree", "reason": "final evaluation: choices fixed on validation"}
+{"arm": "T1", "dataset": "HI-Small", "model_hash": "35a8fa5b478d9c88", "protocol": "causal-tree", "reason": "final evaluation: choices fixed on validation"}
+{"arm": "T1", "dataset": "HI-Small", "model_hash": "50c52714d7b95608", "protocol": "causal-tree", "reason": "final evaluation: choices fixed on validation"}
+{"arm": "T1", "dataset": "HI-Small", "model_hash": "c10ba6f22723b9f3", "protocol": "causal-tree", "reason": "final evaluation: choices fixed on validation"}
+{"arm": "T3x", "dataset": "HI-Small", "model_hash": "e79f474a905deeb1", "protocol": "causal-tree", "reason": "final evaluation: choices fixed on validation"}
+{"arm": "T3x", "dataset": "HI-Small", "model_hash": "fd0bffe393046035", "protocol": "causal-tree", "reason": "final evaluation: choices fixed on validation"}
+{"arm": "T3x", "dataset": "HI-Small", "model_hash": "f0890062c7b8ba26", "protocol": "causal-tree", "reason": "final evaluation: choices fixed on validation"}
+{"arm": "T3x", "dataset": "HI-Small", "model_hash": "3e044be6252ff57b", "protocol": "causal-tree", "reason": "final evaluation: choices fixed on validation"}
+{"arm": "T3x", "dataset": "HI-Small", "model_hash": "89288461b20c1da0", "protocol": "causal-tree", "reason": "final evaluation: choices fixed on validation"}
+{"arm": "T3-nofmt", "dataset": "HI-Small", "model_hash": "039737559ba16e76", "protocol": "causal-tree", "reason": "final evaluation: choices fixed on validation"}
+{"arm": "G3", "dataset": "HI-Small", "model_hash": "seed0", "protocol": "P2", "reason": "final evaluation of CPU-budget GNN; settings fixed on validation"}
+{"arm": "T3-nofmt", "dataset": "HI-Small", "model_hash": "654291d7cb94cb8a", "protocol": "causal-tree", "reason": "final evaluation: choices fixed on validation"}
+{"arm": "T3-nofmt", "dataset": "HI-Small", "model_hash": "2871b60b9d3c613d", "protocol": "causal-tree", "reason": "final evaluation: choices fixed on validation"}
+{"arm": "T3-nofmt", "dataset": "HI-Small", "model_hash": "2121c64cf2f20aa3", "protocol": "causal-tree", "reason": "final evaluation: choices fixed on validation"}
+{"arm": "T3-nofmt", "dataset": "HI-Small", "model_hash": "5adba4799e2b2ee6", "protocol": "causal-tree", "reason": "final evaluation: choices fixed on validation"}
+{"arm": "G2", "dataset": "HI-Small", "model_hash": "seed0", "protocol": "P1", "reason": "final evaluation of CPU-budget GNN; settings fixed on validation"}
+{"arm": "G4", "dataset": "HI-Small", "model_hash": "seed0", "protocol": "P2", "reason": "final evaluation of CPU-budget GNN; settings fixed on validation"}
+{"arm": "G1", "dataset": "HI-Small", "model_hash": "seed0", "protocol": "P1", "reason": "final evaluation of CPU-budget GNN; settings fixed on validation"}
+{"arm": "G2", "dataset": "HI-Small", "model_hash": "seed0", "protocol": "P1", "reason": "rerun: the earlier report write failed because the disk was full"}

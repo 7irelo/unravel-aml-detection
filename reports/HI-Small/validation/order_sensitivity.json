@@ -1,0 +1,50 @@
+{
+  "events": 300000,
+  "vectors_changed_share": 0.07681666666666667,
+  "most_affected_features": [
+    [
+      "src_out_sum_6h",
+      0.050543333333333336
+    ],
+    [
+      "src_out_sum_1h",
+      0.050543333333333336
+    ],
+    [
+      "src_out_sum_96h",
+      0.050543333333333336
+    ],
+    [
+      "src_out_sum_24h",
+      0.050543333333333336
+    ],
+    [
+      "src_out_cnt_24h",
+      0.04942666666666667
+    ],
+    [
+      "src_out_cnt_96h",
+      0.04942666666666667
+    ],
+    [
+      "src_out_cnt_1h",
+      0.04942666666666667
+    ],
+    [
+      "src_out_cnt_6h",
+      0.04942666666666667
+    ]
+  ],
+  "graph_features": [
+    "two_paths_6h",
+    "two_paths_24h",
+    "two_paths_96h",
+    "reciprocal_96h",
+    "cycle3_paths_96h",
+    "cycle_min_hops_96h",
+    "shared_senders_96h",
+    "dst_downstream_reach_96h",
+    "src_upstream_reach_96h",
+    "graph_truncated"
+  ]
+}

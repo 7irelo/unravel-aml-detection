@@ -1,0 +1,161 @@
+{
+  "arm": "T3",
+  "top_features": [
+    {
+      "feature": "payment_format",
+      "mean_abs_shap": 2.538037243976198,
+      "family": "transaction",
+      "description": "Payment format used"
+    },
+    {
+      "feature": "pair_count_prior",
+      "mean_abs_shap": 1.2332544505832828,
+      "family": "behaviour",
+      "description": "Earlier payments from this sender to this receiver"
+    },
+    {
+      "feature": "src_mins_since_out",
+      "mean_abs_shap": 0.6755702671633049,
+      "family": "behaviour",
+      "description": "Time since the sender's previous payment"
+    },
+    {
+      "feature": "dst_age_mins",
+      "mean_abs_shap": 0.5882158166188408,
+      "family": "behaviour",
+      "description": "How long the receiver has been visible in the data"
+    },
+    {
+      "feature": "pair_is_new",
+      "mean_abs_shap": 0.3557746389729933,
+      "family": "behaviour",
+      "description": "First payment seen between these two accounts"
+    },
+    {
+      "feature": "log_usd",
+      "mean_abs_shap": 0.26585077505524624,
+      "family": "transaction",
+      "description": "Size of this transaction in USD"
+    },
+    {
+      "feature": "self_transfer",
+      "mean_abs_shap": 0.23993036204763216,
+      "family": "transaction",
+      "description": "Sender and receiver are the same account"
+    },
+    {
+      "feature": "dst_mins_since_in",
+      "mean_abs_shap": 0.2321832962206022,
+      "family": "behaviour",
+      "description": "Time since the receiver last received funds"
+    },
+    {
+      "feature": "src_age_mins",
+      "mean_abs_shap": 0.22822942729168721,
+      "family": "behaviour",
+      "description": "How long the sender has been visible in the data"
+    },
+    {
+      "feature": "src_currency_switch",
+      "mean_abs_shap": 0.1535261466630809,
+      "family": "behaviour",
+      "description": "Sender changed currency since their last payment"
+    },
+    {
+      "feature": "dst_in_distinct_1h",
+      "mean_abs_shap": 0.1280363928372982,
+      "family": "velocity_diversity",
+      "description": "Receiver's incoming number of counterparties over 1h"
+    },
+    {
+      "feature": "src_format_switch",
+      "mean_abs_shap": 0.09851280571123357,
+      "family": "behaviour",
+      "description": "Sender changed payment format since their last payment"
+    },
+    {
+      "feature": "cycle_min_hops_96h",
+      "mean_abs_shap": 0.0913075943051953,
+      "family": "graph",
+      "description": "This payment closes a cycle of funds of this length"
+    },
+    {
+      "feature": "dst_amount_z",
+      "mean_abs_shap": 0.08124216160168943,
+      "family": "behaviour",
+      "description": "How unusual this amount is for the receiver"
+    },
+    {
+      "feature": "src_amount_z",
+      "mean_abs_shap": 0.07341916364627447,
+      "family": "behaviour",
+      "description": "How unusual this amount is for the sender"
+    },
+    {
+      "feature": "src_mins_since_in",
+      "mean_abs_shap": 0.06997219951588984,
+      "family": "behaviour",
+      "description": "Time since the sender last received funds"
+    },
+    {
+      "feature": "src_out_cnt_1h",
+      "mean_abs_shap": 0.06557156789468509,
+      "family": "velocity_diversity",
+      "description": "Sender's outgoing payment count over 1h"
+    },
+    {
+      "feature": "amount_over_last_in",
+      "mean_abs_shap": 0.06435267308959573,
+      "family": "pass_through",
+      "description": "Amount relative to the sender's most recent inflow"
+    },
+    {
+      "feature": "minute_of_day",
+      "mean_abs_shap": 0.06291072660798261,
+      "family": "transaction",
+      "description": "Time of day"
+    },
+    {
+      "feature": "dst_mins_since_out",
+      "mean_abs_shap": 0.05497630413167319,
+      "family": "behaviour",
+      "description": "Time since the receiver last sent funds"
+    },
+    {
+      "feature": "src_in_sum_96h",
+      "mean_abs_shap": 0.05025569506806504,
+      "family": "velocity_diversity",
+      "description": "Sender's incoming payment value over 96h"
+    },
+    {
+      "feature": "dst_in_sum_1h",
+      "mean_abs_shap": 0.046925665843285995,
+      "family": "velocity_diversity",
+      "description": "Receiver's incoming payment value over 1h"
+    },
+    {
+      "feature": "dst_in_distinct_96h",
+      "mean_abs_shap": 0.04655551501982269,
+      "family": "velocity_diversity",
+      "description": "Receiver's incoming number of counterparties over 96h"
+    },
+    {
+      "feature": "dst_in_sum_96h",
+      "mean_abs_shap": 0.04606526281965033,
+      "family": "velocity_diversity",
+      "description": "Receiver's incoming payment value over 96h"
+    },
+    {
+      "feature": "dst_lifetime_in",
+      "mean_abs_shap": 0.04567706611489398,
+      "family": "behaviour",
+      "description": "Total payments received by the receiver so far"
+    }
+  ],
+  "seed_rank_correlation": [
+    0.9387004300047779,
+    0.9277432712215321,
+    0.9478260869565218,
+    0.9504061156235071
+  ]
+}

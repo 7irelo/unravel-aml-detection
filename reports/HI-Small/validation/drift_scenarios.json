@@ -1,0 +1,97 @@
+{
+  "alert_levels_median": 0.29919121005472044,
+  "training_days_replayed_alerts": [
+    0,
+    1,
+    8,
+    0,
+    0
+  ],
+  "scenarios": {
+    "validation_window_no_injection": {
+      "features_alerting": 1,
+      "top": [
+        [
+          "src_upstream_reach_96h",
+          1.029
+        ]
+      ]
+    },
+    "amounts_times_1_5": {
+      "features_alerting": 12,
+      "top": [
+        [
+          "dst_out_sum_1h",
+          12.025
+        ],
+        [
+          "src_in_sum_1h",
+          10.814
+        ],
+        [
+          "dst_out_sum_6h",
+          9.26
+        ],
+        [
+          "src_in_sum_6h",
+          9.068
+        ],
+        [
+          "dst_out_sum_24h",
+          6.378
+        ],
+        [
+          "dst_in_sum_1h",
+          6.113
+        ]
+      ]
+    },
+    "feature_goes_null": {
+      "features_alerting": 2,
+      "top": [
+        [
+          "two_paths_24h",
+          22.501
+        ],
+        [
+          "src_upstream_reach_96h",
+          1.029
+        ]
+      ]
+    },
+    "feature_goes_constant": {
+      "features_alerting": 2,
+      "top": [
+        [
+          "src_out_cnt_24h",
+          8.408
+        ],
+        [
+          "src_upstream_reach_96h",
+          1.029
+        ]
+      ]
+    },
+    "payment_format_dropped": {
+      "features_alerting": 4,
+      "top": [
+        [
+          "src_lifetime_out",
+          2.512
+        ],
+        [
+          "src_upstream_reach_96h",
+          1.099
+        ],
+        [
+          "pair_is_new",
+          0.785
+        ],
+        [
+          "src_in_distinct_96h",
+          0.511
+        ]
+      ]
+    }
+  }
+}

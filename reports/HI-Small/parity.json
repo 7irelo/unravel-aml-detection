@@ -1,0 +1,15 @@
+{
+  "offline_rows": 5078345,
+  "online_unique": 5078345,
+  "online_messages": 6185270,
+  "missing": 0,
+  "extra": 0,
+  "vectors_compared": 5078345,
+  "vectors_exact": 5078345,
+  "vectors_within_tolerance": 5078345,
+  "conflicting_redeliveries": 0,
+  "max_abs_difference": 0.0,
+  "worst_feature": null,
+  "tolerance": 1e-09,
+  "passed": true
+}

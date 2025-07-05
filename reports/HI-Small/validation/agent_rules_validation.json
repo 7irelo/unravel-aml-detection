@@ -1,0 +1,191 @@
+{
+  "strata_available": {
+    "BIPARTITE": 6,
+    "CYCLE": 10,
+    "FAN-IN": 10,
+    "FAN-OUT": 10,
+    "GATHER-SCATTER": 10,
+    "RANDOM": 10,
+    "SCATTER-GATHER": 10,
+    "STACK": 10,
+    "natural": 4,
+    "false_positive": 40
+  },
+  "rule_baseline": {
+    "n": 76,
+    "accuracy": 0.2631578947368421,
+    "macro_f1": 0.29965456538346563,
+    "confusion": {
+      "BIPARTITE": {
+        "NONE": 5,
+        "BIPARTITE": 1
+      },
+      "CYCLE": {
+        "NONE": 6,
+        "CYCLE": 1,
+        "FAN-IN": 1,
+        "RANDOM": 2
+      },
+      "FAN-IN": {
+        "FAN-IN": 7,
+        "NONE": 2,
+        "CYCLE": 1
+      },
+      "FAN-OUT": {
+        "NONE": 5,
+        "CYCLE": 1,
+        "GATHER-SCATTER": 2,
+        "FAN-OUT": 2
+      },
+      "GATHER-SCATTER": {
+        "CYCLE": 1,
+        "FAN-IN": 5,
+        "NONE": 2,
+        "GATHER-SCATTER": 2
+      },
+      "RANDOM": {
+        "RANDOM": 6,
+        "NONE": 4
+      },
+      "SCATTER-GATHER": {
+        "SCATTER-GATHER": 1,
+        "FAN-OUT": 5,
+        "NONE": 4
+      },
+      "STACK": {
+        "NONE": 9,
+        "CYCLE": 1
+      }
+    }
+  },
+  "scripted_template": {
+    "model": "scripted-template",
+    "cases": 120,
+    "strata": {
+      "BIPARTITE": 6,
+      "CYCLE": 10,
+      "FAN-IN": 10,
+      "FAN-OUT": 10,
+      "GATHER-SCATTER": 10,
+      "RANDOM": 10,
+      "SCATTER-GATHER": 10,
+      "STACK": 10,
+      "natural": 4,
+      "false_positive": 40
+    },
+    "status": {
+      "pending_review": 120
+    },
+    "drafted": 120,
+    "citation_validity_rate": 1.0,
+    "remaining_finding_levels": {},
+    "mean_revisions": 0.0,
+    "pattern": {
+      "n": 76,
+      "accuracy": 0.14473684210526316,
+      "macro_f1": 0.18998917748917746,
+      "confusion": {
+        "BIPARTITE": {
+          "NONE": 5,
+          "BIPARTITE": 1
+        },
+        "CYCLE": {
+          "NONE": 8,
+          "CYCLE": 1,
+          "FAN-IN": 1
+        },
+        "FAN-IN": {
+          "FAN-IN": 5,
+          "NONE": 4,
+          "CYCLE": 1
+        },
+        "FAN-OUT": {
+          "NONE": 6,
+          "CYCLE": 1,
+          "GATHER-SCATTER": 2,
+          "FAN-OUT": 1
+        },
+        "GATHER-SCATTER": {
+          "CYCLE": 1,
+          "NONE": 3,
+          "FAN-IN": 4,
+          "GATHER-SCATTER": 2
+        },
+        "RANDOM": {
+          "NONE": 10
+        },
+        "SCATTER-GATHER": {
+          "SCATTER-GATHER": 1,
+          "FAN-OUT": 4,
+          "NONE": 5
+        },
+        "STACK": {
+          "NONE": 9,
+          "CYCLE": 1
+        }
+      }
+    },
+    "evidence_recall": 0.36748027895880064,
+    "escalate_precision": 0.7297297297297297,
+    "missed_laundering_rate": 0.6625,
+    "false_positive_decline_rate": 0.75,
+    "usage": {
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "cache_read_tokens": 0,
+      "cache_write_tokens": 0,
+      "requests": 720
+    },
+    "cost_per_case_usd": 0.0
+  },
+  "verifier_mutations": {
+    "fabricated_id": {
+      "applied": 120.0,
+      "caught": 120.0,
+      "detection_rate": 1.0,
+      "verifier_expected_to_catch": 1.0
+    },
+    "swapped_citation": {
+      "applied": 120.0,
+      "caught": 120.0,
+      "detection_rate": 1.0,
+      "verifier_expected_to_catch": 1.0
+    },
+    "inflated_total": {
+      "applied": 120.0,
+      "caught": 120.0,
+      "detection_rate": 1.0,
+      "verifier_expected_to_catch": 1.0
+    },
+    "wrong_count": {
+      "applied": 120.0,
+      "caught": 120.0,
+      "detection_rate": 1.0,
+      "verifier_expected_to_catch": 1.0
+    },
+    "unsupported_dollar_figure": {
+      "applied": 120.0,
+      "caught": 120.0,
+      "detection_rate": 1.0,
+      "verifier_expected_to_catch": 1.0
+    },
+    "wrong_typology": {
+      "applied": 37.0,
+      "caught": 37.0,
+      "detection_rate": 1.0,
+      "verifier_expected_to_catch": 1.0
+    },
+    "missing_pattern_evidence": {
+      "applied": 37.0,
+      "caught": 37.0,
+      "detection_rate": 1.0,
+      "verifier_expected_to_catch": 1.0
+    },
+    "removed_contrary_evidence": {
+      "applied": 83.0,
+      "caught": 0.0,
+      "detection_rate": 0.0,
+      "verifier_expected_to_catch": 0.0
+    }
+  }
+}
