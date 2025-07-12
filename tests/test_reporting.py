@@ -55,3 +55,32 @@ def test_decision_rules() -> None:
         Decision(analyst="a", action="reject", reason="   ")
     with pytest.raises(ValidationError):
         Decision(analyst="a", action="file")  # type: ignore[arg-type]
+
+
+def test_demo_prepare_leaves_a_loaded_stack_alone(monkeypatch) -> None:  # type: ignore[no-untyped-def]
+    """Re-running the demo must not regenerate data or fail on duplicate rows."""
+    from typer.testing import CliRunner
+
+    from unravel.cli import app
+
+    class FakeConnection:
+        def __enter__(self):  # type: ignore[no-untyped-def]
+            return self
+
+        def __exit__(self, *_):  # type: ignore[no-untyped-def]
+            return False
+
+        def execute(self, _sql):  # type: ignore[no-untyped-def]
+            return self
+
+        def fetchone(self):  # type: ignore[no-untyped-def]
+            return (8363,)
+
+    def must_not_run(*_args, **_kwargs):  # type: ignore[no-untyped-def]
+        raise AssertionError("a loaded stack must not be rebuilt")
+
+    monkeypatch.setattr("psycopg.connect", lambda _dsn: FakeConnection())
+    monkeypatch.setattr("unravel.data.fixtures.generate_fixture", must_not_run)
+    result = CliRunner().invoke(app, ["demo-prepare", "--name", "unit-test-missing"])
+    assert result.exit_code == 0, result.output
+    assert "already loaded: 8,363" in result.output

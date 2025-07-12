@@ -549,6 +549,73 @@ def gnn_final_evaluation(
     return report
 
 
+def gnn_calibration(
+    paths: DatasetPaths, data: ModelData, arm: str, seed: int, reason: str
+) -> dict[str, Any]:
+    """Calibrate a saved GNN on validation B, using the method chosen for trees, and test it."""
+    import torch
+
+    from unravel.models.gnn import (
+        GnnConfig,
+        MultiPna,
+        NeighbourSampler,
+        degree_histogram,
+        load_edges,
+    )
+    from unravel.models.gnn import predict as gnn_predict
+
+    directory = _model_dir(paths, arm, seed)
+    meta = json.loads((directory / "meta.json").read_text())
+    settings = dict(meta["config"])
+    settings["fanout"] = tuple(settings["fanout"])
+    settings["extra_columns"] = tuple(settings["extra_columns"])
+    config = GnnConfig(**settings)
+    table = load_edges(paths, config.extra_columns)
+    val_b = np.flatnonzero(table.partition == VAL_B)
+    test = np.flatnonzero(table.partition == TEST)
+    # Under P1 a snapshot ends with its own window, so validation can't see test edges.
+    sampler_b = NeighbourSampler(table, config, int(val_b.max()) + 1, seed + 2)
+    probe = sampler_b.batch(val_b[:4])
+    model = MultiPna(
+        probe.edge_attr.shape[1],
+        probe.target_attr.shape[1],
+        degree_histogram(table, table.partition == TRAIN),
+        config,
+    )
+    model.load_state_dict(torch.load(directory / "model.pt", weights_only=True))
+    raw_b = gnn_predict(model, sampler_b, val_b)
+    method = json.loads((paths.reports / "validation" / "calibration_T3.json").read_text())[
+        "chosen"
+    ]
+    calibrator = Calibrator.fit(method, raw_b, table.y[val_b])
+    calibrator.save(directory / "calibrator.json")
+
+    record_test_evaluation(
+        paths.reports / LEDGER_NAME,
+        dataset=paths.name,
+        arm=arm,
+        protocol=config.protocol,
+        model_hash=f"seed{seed}",
+        reason=reason,
+    )
+    sampler_test = NeighbourSampler(table, config, len(table.src), seed + 2)
+    raw_test = gnn_predict(model, sampler_test, test)
+    y_test = table.y[test]
+    out = {
+        "arm": arm,
+        "protocol": config.protocol,
+        "seed": seed,
+        "method": method,
+        "validation_b": calibration_summary(table.y[val_b], calibrator.transform(raw_b)),
+        "test_raw": calibration_summary(y_test, raw_test),
+        "test_calibrated": calibration_summary(y_test, calibrator.transform(raw_test)),
+    }
+    _write_json(
+        paths.reports / "test" / f"calibration_{arm}_{config.protocol}_seed{seed}.json", out
+    )
+    return out
+
+
 def order_sensitivity(paths: DatasetPaths) -> dict[str, Any]:
     """How much can same-minute order matter? It compares vectors under two tie-break orders.
 

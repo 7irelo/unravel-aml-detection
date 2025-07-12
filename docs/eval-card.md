@@ -31,7 +31,7 @@ This needs an API key and human time, and is one command away (`docs/runbook.md`
 - Refusal rate, cost per case, and run-to-run consistency.
 - Judge agreement with human ratings, using weighted kappa, and judge detection of seeded errors.
 
-The API request shape is tested against a fake SDK client, including the rules on sampling parameters, forced tool choice and thinking blocks. It hasn't yet been run against the live API.
+The full LLM code path runs in `tests/test_llm_path.py` through the real client against a fake SDK: the tool loop, structured drafts, the verifier, the judge, spending limits and append-only history for thinking blocks. That shows the wiring works, but it hasn't yet been run against the live API, so a first live run may still surface differences.
 
 ## Known limits
 

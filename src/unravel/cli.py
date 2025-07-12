@@ -152,6 +152,22 @@ def final_eval_gnn(
     _print({"pr_auc": result["pr_auc"], "f1": result["minority_f1"]})
 
 
+@app.command("calibrate-gnn")
+def calibrate_gnn(
+    arm: str = "G3",
+    seed: int = 0,
+    reason: str = typer.Option(..., help="Why test is being evaluated. Recorded in the ledger."),
+    name: str = "HI-Small",
+) -> None:
+    """Calibrate a saved GNN on validation B, then measure it on TEST. Leaves a ledger entry."""
+    from unravel.experiments import gnn_calibration
+    from unravel.models.dataset import load_model_data
+
+    paths = DatasetPaths(name)
+    result = gnn_calibration(paths, load_model_data(paths), arm, seed, reason)
+    _print({k: result[k]["log_loss"] for k in ("test_raw", "test_calibrated")})
+
+
 @app.command("agent-rules-test")
 def agent_rules_test(name: str = "HI-Small") -> None:
     """Run the no-LLM agent evaluation on real test-window alerts."""
