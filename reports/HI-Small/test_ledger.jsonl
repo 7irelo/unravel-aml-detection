@@ -30,3 +30,11 @@
 {"arm": "G4", "dataset": "HI-Small", "model_hash": "seed0", "protocol": "P2", "reason": "final evaluation of CPU-budget GNN; settings fixed on validation"}
 {"arm": "G1", "dataset": "HI-Small", "model_hash": "seed0", "protocol": "P1", "reason": "final evaluation of CPU-budget GNN; settings fixed on validation"}
 {"arm": "G2", "dataset": "HI-Small", "model_hash": "seed0", "protocol": "P1", "reason": "rerun: the earlier report write failed because the disk was full"}
+{"arm": "G3", "dataset": "HI-Small", "model_hash": "seed0", "protocol": "P2", "reason": "calibration of a CPU-budget GNN: fitted on validation B"}
+{"arm": "G3", "dataset": "HI-Small", "model_hash": "seed1", "protocol": "P2", "reason": "additional seed of a CPU-budget GNN; settings unchanged"}
+{"arm": "G2", "dataset": "HI-Small", "model_hash": "seed1", "protocol": "P1", "reason": "additional seed of a CPU-budget GNN; settings unchanged"}
+{"arm": "G2", "dataset": "HI-Small", "model_hash": "seed0", "protocol": "P1", "reason": "calibration of a CPU-budget GNN: fitted on validation B"}
+{"arm": "G3", "dataset": "HI-Small", "model_hash": "seed2", "protocol": "P2", "reason": "additional seed of a CPU-budget GNN; settings unchanged"}
+{"arm": "G4", "dataset": "HI-Small", "model_hash": "seed0", "protocol": "P2", "reason": "calibration of a CPU-budget GNN: fitted on validation B"}
+{"arm": "G2", "dataset": "HI-Small", "model_hash": "seed2", "protocol": "P1", "reason": "additional seed of a CPU-budget GNN; settings unchanged"}
+{"arm": "G1", "dataset": "HI-Small", "model_hash": "seed0", "protocol": "P1", "reason": "calibration of a CPU-budget GNN: fitted on validation B"}

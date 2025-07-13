@@ -66,6 +66,15 @@ def _std(runs: list[dict[str, Any]], *keys: str) -> float:
     return (sum((v - mean) ** 2 for v in values) / (len(values) - 1)) ** 0.5
 
 
+def _gnn_groups(test: Path) -> dict[str, list[dict[str, Any]]]:
+    """Test reports per GNN arm and protocol, across seeds."""
+    groups: dict[str, list[dict[str, Any]]] = {}
+    for path in sorted(test.glob("G*_seed*.json")):
+        result = _load(path)
+        groups.setdefault(f"{result['arm']}, {result['protocol']}", []).append(result)
+    return groups
+
+
 def build_results(name: str = "HI-Small") -> str:
     paths = DatasetPaths(name)
     reports = paths.reports
@@ -86,7 +95,7 @@ def build_results(name: str = "HI-Small") -> str:
         out += ["## Detection on the test set", ""]
         out += [
             f"Test-set evaluations on record: **{len(ledger)}**, counting each seed of each arm, "
-            "two early T3 runs repeated with fewer bootstrap samples, and one G2 run repeated "
+            "GNN calibration, two early T3 runs repeated with fewer bootstrap samples, and one G2 run repeated "
             "after its report failed to write. "
             "Model and threshold choices were made on validation.",
             "",
@@ -250,69 +259,77 @@ def build_results(name: str = "HI-Small") -> str:
                     ],
                 )
 
-    gnn_rows = []
-    gnn_patterns: dict[str, dict[str, Any]] = {}
-    for path in sorted(test.glob("G*_seed*.json")):
-        result = _load(path)
-        label = f"{result['arm']}, {result['protocol']}"
-        full = result["full_volume_days"]
-        gnn_rows.append(
-            [
-                label,
-                f"{100 * result['minority_f1']['f1']:.2f}",
-                f"{100 * full['minority_f1']['f1']:.2f}",
-                f"{result['pr_auc']:.4f}",
-                f"{full['pr_auc']:.4f}",
-                f"{100 * full['capacity']['100']['precision']:.1f}%",
-            ]
-        )
-        gnn_patterns[label] = full["per_pattern"]
-    if gnn_rows:
+    groups = _gnn_groups(test)
+    if groups:
+        seeds = sorted({len(runs) for runs in groups.values()})
+        seed_text = " to ".join(str(n) for n in seeds)
         out += ["## Graph neural networks on the test set", ""]
         out += [
-            "**These are CPU-budget runs**: one seed, 8 epochs, hidden size 48, neighbours (15, 5) "
-            "and 20 negatives per positive. Training curves were still improving when they stopped. "
-            "They don't reproduce published GNN results, which took hours per run on a GPU with far "
-            "larger neighbourhoods, and they don't show the limit of the method.",
+            f"**These are CPU-budget runs**: {seed_text} seeds per arm, 8 epochs, hidden size 48, "
+            "neighbours (15, 5) and 20 negatives per positive. Training curves were still improving "
+            "when they stopped. They don't reproduce published GNN results, which took hours per "
+            "run on a GPU with far larger neighbourhoods, and they don't show the limit of the "
+            "method.",
             "",
             "- **G1:** plain PNA. **G2:** Multi-PNA + EU, neighbours may come from later edges (P1).",
             "- **G3:** Multi-PNA + EU, strictly earlier edges (P2). **G4:** G3 plus T2 features.",
             "",
         ]
+        rows = []
+        for label, runs in groups.items():
+            rows.append(
+                [
+                    label,
+                    str(len(runs)),
+                    _pm(_avg(runs, "minority_f1", "f1"), _std(runs, "minority_f1", "f1")),
+                    _pm(
+                        _avg(runs, "full_volume_days", "minority_f1", "f1"),
+                        _std(runs, "full_volume_days", "minority_f1", "f1"),
+                    ),
+                    f"{_avg(runs, 'pr_auc'):.4f}",
+                    f"{_avg(runs, 'full_volume_days', 'pr_auc'):.4f}",
+                    f"{100 * _avg(runs, 'full_volume_days', 'capacity', '100', 'precision'):.1f}%",
+                ]
+            )
         out += _table(
             [
                 "Arm",
+                "Seeds",
                 "F1 %, all test days",
                 "F1 %, full-volume days",
                 "PR-AUC, all",
                 "PR-AUC, full-volume",
                 "Precision@100",
             ],
-            gnn_rows,
+            rows,
         )
         champion_run = test_arms.get("T3")
         if champion_run:
             trees = champion_run["runs"][0]["full_volume_days"]["per_pattern"]
             rows = []
             for pattern in sorted(trees):
+                cells = []
+                for runs in groups.values():
+                    values = [
+                        r["full_volume_days"]["per_pattern"].get(pattern, {}).get("recall", 0.0)
+                        for r in runs
+                    ]
+                    cells.append(f"{100 * sum(values) / len(values):.0f}%")
                 rows.append(
                     [
                         pattern,
                         str(int(trees[pattern]["n"])),
                         f"{100 * trees[pattern]['recall']:.0f}%",
-                        *[
-                            f"{100 * v.get(pattern, {}).get('recall', 0):.0f}%"
-                            for v in gnn_patterns.values()
-                        ],
+                        *cells,
                     ]
                 )
             out += [
                 "Recall by pattern against T3, on full-volume days, each at its own validation "
-                "threshold. This is the direct test of whether a GNN catches what hand-built "
-                "graph features miss:",
+                "threshold and averaged over seeds. This is the direct test of whether a GNN "
+                "catches what hand-built graph features miss:",
                 "",
             ]
-            out += _table(["Pattern", "n", "T3", *list(gnn_patterns)], rows)
+            out += _table(["Pattern", "n", "T3", *list(groups)], rows)
             out += [
                 "Read recall with precision in mind: an arm can reach high recall by alerting much "
                 "more, and its F1 above shows the overall trade-off. On this budget, this table "
@@ -320,6 +337,33 @@ def build_results(name: str = "HI-Small") -> str:
                 "properly trained GNN could change that.",
                 "",
             ]
+        calibrations = [_load(path) for path in sorted(test.glob("calibration_G*.json"))]
+        if calibrations:
+            out += ["### GNN calibration", ""]
+            out += [
+                "Fitted on validation B with the method chosen for the trees, on seed 0. Log loss "
+                "and Brier skill on the test set:",
+                "",
+            ]
+            out += _table(
+                [
+                    "Arm",
+                    "Raw log loss",
+                    "Calibrated log loss",
+                    "Raw Brier skill",
+                    "Calibrated Brier skill",
+                ],
+                [
+                    [
+                        f"{c['arm']}, {c['protocol']}",
+                        f"{c['test_raw']['log_loss']:.5f}",
+                        f"{c['test_calibrated']['log_loss']:.5f}",
+                        f"{c['test_raw']['brier_skill']:.4f}",
+                        f"{c['test_calibrated']['brier_skill']:.4f}",
+                    ]
+                    for c in calibrations
+                ],
+            )
 
     # -- validation ----------------------------------------------------------------------------
     out += ["## Detection on validation A", ""]
@@ -342,14 +386,17 @@ def build_results(name: str = "HI-Small") -> str:
                     f"{100 * sum(precision) / len(precision):.1f}%",
                 ]
             )
+    grouped: dict[str, list[dict[str, Any]]] = {}
     for path in sorted(validation.glob("G*_seed*.json")):
         result = _load(path)
+        grouped.setdefault(f"{result['arm']}, {result['protocol']}, CPU budget", []).append(result)
+    for label, runs in grouped.items():
         rows.append(
             [
-                f"{result['arm']}, {result['protocol']}, CPU budget",
-                "1",
-                f"{100 * result['val_a_f1']['f1']:.2f}",
-                f"{result['val_a_pr_auc']:.4f}",
+                label,
+                str(len(runs)),
+                _pm(_avg(runs, "val_a_f1", "f1"), _std(runs, "val_a_f1", "f1")),
+                f"{_avg(runs, 'val_a_pr_auc'):.4f} ± {_std(runs, 'val_a_pr_auc'):.4f}",
                 "-",
             ]
         )
@@ -510,24 +557,26 @@ def build_results(name: str = "HI-Small") -> str:
         "- **Judge calibration:** needs human ratings of the sheet that `unravel agent-eval` writes.",
         "- **Published GNN reproduction and full GNN results:** need a GPU. CPU-budget runs "
         "above use short training and small neighbourhoods, and don't reproduce published numbers.",
+        "- **HI-Medium:** the commands take `--name HI-Medium`, but it needs about 9 GB of free "
+        "disk, and it hasn't been run.",
         "",
     ]
     return "\n".join(out)
 
 
 def _gnn_lines(paths: DatasetPaths) -> list[str]:
-    p1 = _load(paths.reports / "test" / "G2_P1_seed0.json")
-    p2 = _load(paths.reports / "test" / "G3_P2_seed0.json")
+    groups = _gnn_groups(paths.reports / "test")
+    p1, p2 = groups.get("G2, P1"), groups.get("G3, P2")
     if not (p1 and p2):
         return ["- **GNNs:** not yet evaluated."]
-    a = 100 * p1["full_volume_days"]["minority_f1"]["f1"]
-    b = 100 * p2["full_volume_days"]["minority_f1"]["f1"]
     return [
-        f"- **Causal evaluation costs real performance:** the same Multi-PNA on the same budget "
-        f"scores F1 {a:.0f} when neighbours may include later edges, as in published protocols, "
-        f"and {b:.0f} with strictly earlier edges (one seed each, full-volume days).",
-        "- **GNNs:** CPU-budget runs only, on one seed. They trail the trees and don't reproduce "
-        "published results, so a GPU run is needed for a fair comparison.",
+        "- **Causal evaluation costs real performance:** the same Multi-PNA on the same budget "
+        f"scores F1 {_pm(_avg(p1, 'full_volume_days', 'minority_f1', 'f1'), _std(p1, 'full_volume_days', 'minority_f1', 'f1'), digits=1)} "
+        "when neighbours may include later edges, as in published protocols, and "
+        f"{_pm(_avg(p2, 'full_volume_days', 'minority_f1', 'f1'), _std(p2, 'full_volume_days', 'minority_f1', 'f1'), digits=1)} "
+        f"with strictly earlier edges ({len(p1)} seeds each, full-volume days).",
+        "- **GNNs:** CPU-budget runs only. They trail the trees and don't reproduce published "
+        "results, so a GPU run is needed for a fair comparison.",
     ]
 
 

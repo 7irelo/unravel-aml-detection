@@ -20,8 +20,8 @@ The all-days column uses the same day boundaries as published work, where the be
 - **At 100 alerts a day:** 99.8% precision and 20.9% recall, against a recall ceiling of 20.9%, on just 2 full-volume test days.
 - **The main limitation:** the model recalls 85% of laundering in named patterns but only 2% of "natural" laundering, such as paying employees, which makes up 39% of positives on those days.
 - **Parity:** all 5,078,345 feature vectors read back from Redpanda were identical to offline, across real consumer crashes.
-- **Causal evaluation costs real performance:** the same Multi-PNA on the same budget scores F1 42 when neighbours may include later edges, as in published protocols, and 29 with strictly earlier edges (one seed each, full-volume days).
-- **GNNs:** CPU-budget runs only, on one seed. They trail the trees and don't reproduce published results, so a GPU run is needed for a fair comparison.
+- **Causal evaluation costs real performance:** the same Multi-PNA on the same budget scores F1 38.6 ± 3.3 when neighbours may include later edges, as in published protocols, and 30.7 ± 2.0 with strictly earlier edges (3 seeds each, full-volume days).
+- **GNNs:** CPU-budget runs only. They trail the trees and don't reproduce published results, so a GPU run is needed for a fair comparison.
 - **LLM narratives:** the agent and evaluation are built and tested with a scripted client. Quality on a real model is not yet measured, as it needs an API key.
 
 <!-- RESULTS:END -->

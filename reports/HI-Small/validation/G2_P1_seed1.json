@@ -1,0 +1,21 @@
+{
+  "arm": "G2",
+  "protocol": "P1",
+  "seed": 1,
+  "best_epoch": 8,
+  "training_seconds": 1858.608952399998,
+  "device": "cpu",
+  "config": {
+    "hidden": 48,
+    "fanout": "15,5",
+    "epochs": 8,
+    "negatives_per_positive": 20
+  },
+  "val_a_pr_auc": 0.3648934215579242,
+  "val_a_f1": {
+    "f1": 0.41221374045801523,
+    "precision": 0.45,
+    "recall": 0.38028169014084506
+  },
+  "threshold": 0.9959756731987
+}
