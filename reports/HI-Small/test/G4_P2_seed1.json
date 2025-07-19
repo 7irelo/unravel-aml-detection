@@ -1,0 +1,742 @@
+{
+  "transactions": 863900,
+  "positives": 1611,
+  "base_rate": 0.0018647991665702048,
+  "pr_auc": 0.6373335616853913,
+  "pr_auc_ci": {
+    "low": 0.6004941978937516,
+    "high": 0.6710293964057109,
+    "se": 0.02187460169421273,
+    "n_boot": 30.0
+  },
+  "rate": {
+    "rate": 0.0002,
+    "k": 173.0,
+    "precision": 0.9248554913294798,
+    "recall": 0.09931719428926133
+  },
+  "capacity": {
+    "50": {
+      "k": 50.0,
+      "days": 10.0,
+      "precision": 0.8215962441314554,
+      "recall": 0.21725636250775915,
+      "recall_ceiling": 0.234016139044072,
+      "case_precision": 0.9420731707317073,
+      "case_recall": 0.25040518638573744,
+      "pattern_hit_rate": 0.41530054644808745,
+      "value_captured": 0.17260861376745185,
+      "per_day": [
+        {
+          "day": 8.0,
+          "transactions": 654467.0,
+          "positives": 514.0,
+          "alerts": 50.0,
+          "precision": 0.76,
+          "recall": 0.07392996108949416,
+          "recall_ceiling": 0.09727626459143969,
+          "case_precision": 0.7
+        },
+        {
+          "day": 9.0,
+          "transactions": 208325.0,
+          "positives": 442.0,
+          "alerts": 50.0,
+          "precision": 0.92,
+          "recall": 0.10407239819004525,
+          "recall_ceiling": 0.11312217194570136,
+          "case_precision": 0.92
+        },
+        {
+          "day": 10.0,
+          "transactions": 396.0,
+          "positives": 232.0,
+          "alerts": 50.0,
+          "precision": 0.94,
+          "recall": 0.2025862068965517,
+          "recall_ceiling": 0.21551724137931033,
+          "case_precision": 1.0
+        },
+        {
+          "day": 11.0,
+          "transactions": 281.0,
+          "positives": 170.0,
+          "alerts": 50.0,
+          "precision": 0.98,
+          "recall": 0.28823529411764703,
+          "recall_ceiling": 0.29411764705882354,
+          "case_precision": 1.0
+        },
+        {
+          "day": 12.0,
+          "transactions": 184.0,
+          "positives": 106.0,
+          "alerts": 50.0,
+          "precision": 0.94,
+          "recall": 0.44339622641509435,
+          "recall_ceiling": 0.4716981132075472,
+          "case_precision": 1.0
+        },
+        {
+          "day": 13.0,
+          "transactions": 121.0,
+          "positives": 70.0,
+          "alerts": 50.0,
+          "precision": 0.92,
+          "recall": 0.6571428571428571,
+          "recall_ceiling": 0.7142857142857143,
+          "case_precision": 1.0
+        },
+        {
+          "day": 14.0,
+          "transactions": 46.0,
+          "positives": 28.0,
+          "alerts": 46.0,
+          "precision": 0.6086956521739131,
+          "recall": 1.0,
+          "recall_ceiling": 1.0,
+          "case_precision": 1.0
+        },
+        {
+          "day": 15.0,
+          "transactions": 46.0,
+          "positives": 26.0,
+          "alerts": 46.0,
+          "precision": 0.5652173913043478,
+          "recall": 1.0,
+          "recall_ceiling": 1.0,
+          "case_precision": 1.0
+        },
+        {
+          "day": 16.0,
+          "transactions": 23.0,
+          "positives": 15.0,
+          "alerts": 23.0,
+          "precision": 0.6521739130434783,
+          "recall": 1.0,
+          "recall_ceiling": 1.0,
+          "case_precision": 1.0
+        },
+        {
+          "day": 17.0,
+          "transactions": 11.0,
+          "positives": 8.0,
+          "alerts": 11.0,
+          "precision": 0.7272727272727273,
+          "recall": 1.0,
+          "recall_ceiling": 1.0,
+          "case_precision": 1.0
+        }
+      ]
+    },
+    "100": {
+      "k": 100.0,
+      "days": 10.0,
+      "precision": 0.8236914600550964,
+      "recall": 0.3711980136561142,
+      "recall_ceiling": 0.4016139044072005,
+      "case_precision": 0.9413854351687388,
+      "case_recall": 0.42949756888168555,
+      "pattern_hit_rate": 0.6284153005464481,
+      "value_captured": 0.36978847453861646,
+      "per_day": [
+        {
+          "day": 8.0,
+          "transactions": 654467.0,
+          "positives": 514.0,
+          "alerts": 100.0,
+          "precision": 0.78,
+          "recall": 0.1517509727626459,
+          "recall_ceiling": 0.19455252918287938,
+          "case_precision": 0.72
+        },
+        {
+          "day": 9.0,
+          "transactions": 208325.0,
+          "positives": 442.0,
+          "alerts": 100.0,
+          "precision": 0.92,
+          "recall": 0.2081447963800905,
+          "recall_ceiling": 0.22624434389140272,
+          "case_precision": 0.95
+        },
+        {
+          "day": 10.0,
+          "transactions": 396.0,
+          "positives": 232.0,
+          "alerts": 100.0,
+          "precision": 0.94,
+          "recall": 0.4051724137931034,
+          "recall_ceiling": 0.43103448275862066,
+          "case_precision": 1.0
+        },
+        {
+          "day": 11.0,
+          "transactions": 281.0,
+          "positives": 170.0,
+          "alerts": 100.0,
+          "precision": 0.95,
+          "recall": 0.5588235294117647,
+          "recall_ceiling": 0.5882352941176471,
+          "case_precision": 1.0
+        },
+        {
+          "day": 12.0,
+          "transactions": 184.0,
+          "positives": 106.0,
+          "alerts": 100.0,
+          "precision": 0.92,
+          "recall": 0.8679245283018868,
+          "recall_ceiling": 0.9433962264150944,
+          "case_precision": 1.0
+        },
+        {
+          "day": 13.0,
+          "transactions": 121.0,
+          "positives": 70.0,
+          "alerts": 100.0,
+          "precision": 0.7,
+          "recall": 1.0,
+          "recall_ceiling": 1.0,
+          "case_precision": 1.0
+        },
+        {
+          "day": 14.0,
+          "transactions": 46.0,
+          "positives": 28.0,
+          "alerts": 46.0,
+          "precision": 0.6086956521739131,
+          "recall": 1.0,
+          "recall_ceiling": 1.0,
+          "case_precision": 1.0
+        },
+        {
+          "day": 15.0,
+          "transactions": 46.0,
+          "positives": 26.0,
+          "alerts": 46.0,
+          "precision": 0.5652173913043478,
+          "recall": 1.0,
+          "recall_ceiling": 1.0,
+          "case_precision": 1.0
+        },
+        {
+          "day": 16.0,
+          "transactions": 23.0,
+          "positives": 15.0,
+          "alerts": 23.0,
+          "precision": 0.6521739130434783,
+          "recall": 1.0,
+          "recall_ceiling": 1.0,
+          "case_precision": 1.0
+        },
+        {
+          "day": 17.0,
+          "transactions": 11.0,
+          "positives": 8.0,
+          "alerts": 11.0,
+          "precision": 0.7272727272727273,
+          "recall": 1.0,
+          "recall_ceiling": 1.0,
+          "case_precision": 1.0
+        }
+      ]
+    },
+    "200": {
+      "k": 200.0,
+      "days": 10.0,
+      "precision": 0.7359870024370431,
+      "recall": 0.5623836126629422,
+      "recall_ceiling": 0.6350093109869647,
+      "case_precision": 0.8647727272727272,
+      "case_recall": 0.6166936790923825,
+      "pattern_hit_rate": 0.8579234972677595,
+      "value_captured": 0.638895697764071,
+      "per_day": [
+        {
+          "day": 8.0,
+          "transactions": 654467.0,
+          "positives": 514.0,
+          "alerts": 200.0,
+          "precision": 0.695,
+          "recall": 0.2704280155642023,
+          "recall_ceiling": 0.38910505836575876,
+          "case_precision": 0.615
+        },
+        {
+          "day": 9.0,
+          "transactions": 208325.0,
+          "positives": 442.0,
+          "alerts": 200.0,
+          "precision": 0.815,
+          "recall": 0.36877828054298645,
+          "recall_ceiling": 0.45248868778280543,
+          "case_precision": 0.79
+        },
+        {
+          "day": 10.0,
+          "transactions": 396.0,
+          "positives": 232.0,
+          "alerts": 200.0,
+          "precision": 0.905,
+          "recall": 0.7801724137931034,
+          "recall_ceiling": 0.8620689655172413,
+          "case_precision": 1.0
+        },
+        {
+          "day": 11.0,
+          "transactions": 281.0,
+          "positives": 170.0,
+          "alerts": 200.0,
+          "precision": 0.85,
+          "recall": 1.0,
+          "recall_ceiling": 1.0,
+          "case_precision": 1.0
+        },
+        {
+          "day": 12.0,
+          "transactions": 184.0,
+          "positives": 106.0,
+          "alerts": 184.0,
+          "precision": 0.5760869565217391,
+          "recall": 1.0,
+          "recall_ceiling": 1.0,
+          "case_precision": 1.0
+        },
+        {
+          "day": 13.0,
+          "transactions": 121.0,
+          "positives": 70.0,
+          "alerts": 121.0,
+          "precision": 0.5785123966942148,
+          "recall": 1.0,
+          "recall_ceiling": 1.0,
+          "case_precision": 1.0
+        },
+        {
+          "day": 14.0,
+          "transactions": 46.0,
+          "positives": 28.0,
+          "alerts": 46.0,
+          "precision": 0.6086956521739131,
+          "recall": 1.0,
+          "recall_ceiling": 1.0,
+          "case_precision": 1.0
+        },
+        {
+          "day": 15.0,
+          "transactions": 46.0,
+          "positives": 26.0,
+          "alerts": 46.0,
+          "precision": 0.5652173913043478,
+          "recall": 1.0,
+          "recall_ceiling": 1.0,
+          "case_precision": 1.0
+        },
+        {
+          "day": 16.0,
+          "transactions": 23.0,
+          "positives": 15.0,
+          "alerts": 23.0,
+          "precision": 0.6521739130434783,
+          "recall": 1.0,
+          "recall_ceiling": 1.0,
+          "case_precision": 1.0
+        },
+        {
+          "day": 17.0,
+          "transactions": 11.0,
+          "positives": 8.0,
+          "alerts": 11.0,
+          "precision": 0.7272727272727273,
+          "recall": 1.0,
+          "recall_ceiling": 1.0,
+          "case_precision": 1.0
+        }
+      ]
+    },
+    "500": {
+      "k": 500.0,
+      "days": 10.0,
+      "precision": 0.5308349146110057,
+      "recall": 0.6945996275605214,
+      "recall_ceiling": 0.9913097454996896,
+      "case_precision": 0.5898648648648649,
+      "case_recall": 0.7074554294975689,
+      "pattern_hit_rate": 0.9562841530054644,
+      "value_captured": 0.750121941185581,
+      "per_day": [
+        {
+          "day": 8.0,
+          "transactions": 654467.0,
+          "positives": 514.0,
+          "alerts": 500.0,
+          "precision": 0.448,
+          "recall": 0.4357976653696498,
+          "recall_ceiling": 0.9727626459143969,
+          "case_precision": 0.378
+        },
+        {
+          "day": 9.0,
+          "transactions": 208325.0,
+          "positives": 442.0,
+          "alerts": 500.0,
+          "precision": 0.48,
+          "recall": 0.5429864253393665,
+          "recall_ceiling": 1.0,
+          "case_precision": 0.408
+        },
+        {
+          "day": 10.0,
+          "transactions": 396.0,
+          "positives": 232.0,
+          "alerts": 396.0,
+          "precision": 0.5858585858585859,
+          "recall": 1.0,
+          "recall_ceiling": 1.0,
+          "case_precision": 1.0
+        },
+        {
+          "day": 11.0,
+          "transactions": 281.0,
+          "positives": 170.0,
+          "alerts": 281.0,
+          "precision": 0.604982206405694,
+          "recall": 1.0,
+          "recall_ceiling": 1.0,
+          "case_precision": 1.0
+        },
+        {
+          "day": 12.0,
+          "transactions": 184.0,
+          "positives": 106.0,
+          "alerts": 184.0,
+          "precision": 0.5760869565217391,
+          "recall": 1.0,
+          "recall_ceiling": 1.0,
+          "case_precision": 1.0
+        },
+        {
+          "day": 13.0,
+          "transactions": 121.0,
+          "positives": 70.0,
+          "alerts": 121.0,
+          "precision": 0.5785123966942148,
+          "recall": 1.0,
+          "recall_ceiling": 1.0,
+          "case_precision": 1.0
+        },
+        {
+          "day": 14.0,
+          "transactions": 46.0,
+          "positives": 28.0,
+          "alerts": 46.0,
+          "precision": 0.6086956521739131,
+          "recall": 1.0,
+          "recall_ceiling": 1.0,
+          "case_precision": 1.0
+        },
+        {
+          "day": 15.0,
+          "transactions": 46.0,
+          "positives": 26.0,
+          "alerts": 46.0,
+          "precision": 0.5652173913043478,
+          "recall": 1.0,
+          "recall_ceiling": 1.0,
+          "case_precision": 1.0
+        },
+        {
+          "day": 16.0,
+          "transactions": 23.0,
+          "positives": 15.0,
+          "alerts": 23.0,
+          "precision": 0.6521739130434783,
+          "recall": 1.0,
+          "recall_ceiling": 1.0,
+          "case_precision": 1.0
+        },
+        {
+          "day": 17.0,
+          "transactions": 11.0,
+          "positives": 8.0,
+          "alerts": 11.0,
+          "precision": 0.7272727272727273,
+          "recall": 1.0,
+          "recall_ceiling": 1.0,
+          "case_precision": 1.0
+        }
+      ]
+    }
+  },
+  "online_regret_100": {
+    "days_evaluated": 9.0,
+    "oracle_precision": 0.8306709265175719,
+    "live_precision": 0.896551724137931,
+    "live_alerts_per_day": 54.77777777777778,
+    "true_positives_lost": 78.0
+  },
+  "threshold": 0.9958415627479553,
+  "minority_f1": {
+    "f1": 0.647313156269302,
+    "precision": 0.6441303011677935,
+    "recall": 0.6505276225946617
+  },
+  "minority_f1_ci": {
+    "low": 0.6220113064940651,
+    "high": 0.6751245274406882,
+    "se": 0.015337648583678353,
+    "n_boot": 30.0
+  },
+  "per_pattern": {
+    "BIPARTITE": {
+      "n": 66.0,
+      "recall": 0.7575757575757576
+    },
+    "CYCLE": {
+      "n": 99.0,
+      "recall": 0.7878787878787878
+    },
+    "FAN-IN": {
+      "n": 123.0,
+      "recall": 0.8130081300813008
+    },
+    "FAN-OUT": {
+      "n": 131.0,
+      "recall": 0.916030534351145
+    },
+    "GATHER-SCATTER": {
+      "n": 381.0,
+      "recall": 0.9028871391076115
+    },
+    "RANDOM": {
+      "n": 84.0,
+      "recall": 0.7619047619047619
+    },
+    "SCATTER-GATHER": {
+      "n": 239.0,
+      "recall": 0.891213389121339
+    },
+    "STACK": {
+      "n": 117.0,
+      "recall": 0.6410256410256411
+    },
+    "natural": {
+      "n": 371.0,
+      "recall": 0.01078167115902965
+    }
+  },
+  "full_volume_days": {
+    "transactions": 862792,
+    "positives": 956,
+    "base_rate": 0.0011080306725143488,
+    "pr_auc": 0.4261044681602958,
+    "pr_auc_ci": {
+      "low": 0.37836287089525245,
+      "high": 0.4717262722300071,
+      "se": 0.026316309960577947,
+      "n_boot": 30.0
+    },
+    "rate": {
+      "rate": 0.0002,
+      "k": 173.0,
+      "precision": 0.8554913294797688,
+      "recall": 0.15481171548117154
+    },
+    "capacity": {
+      "50": {
+        "k": 50.0,
+        "days": 2.0,
+        "precision": 0.84,
+        "recall": 0.08786610878661087,
+        "recall_ceiling": 0.10460251046025104,
+        "case_precision": 0.81,
+        "case_recall": 0.10742705570291777,
+        "pattern_hit_rate": 0.26436781609195403,
+        "value_captured": 0.06002448071362973,
+        "per_day": [
+          {
+            "day": 8.0,
+            "transactions": 654467.0,
+            "positives": 514.0,
+            "alerts": 50.0,
+            "precision": 0.76,
+            "recall": 0.07392996108949416,
+            "recall_ceiling": 0.09727626459143969,
+            "case_precision": 0.7
+          },
+          {
+            "day": 9.0,
+            "transactions": 208325.0,
+            "positives": 442.0,
+            "alerts": 50.0,
+            "precision": 0.92,
+            "recall": 0.10407239819004525,
+            "recall_ceiling": 0.11312217194570136,
+            "case_precision": 0.92
+          }
+        ]
+      },
+      "100": {
+        "k": 100.0,
+        "days": 2.0,
+        "precision": 0.85,
+        "recall": 0.17782426778242677,
+        "recall_ceiling": 0.20920502092050208,
+        "case_precision": 0.835,
+        "case_recall": 0.22148541114058357,
+        "pattern_hit_rate": 0.45977011494252873,
+        "value_captured": 0.24971587973536144,
+        "per_day": [
+          {
+            "day": 8.0,
+            "transactions": 654467.0,
+            "positives": 514.0,
+            "alerts": 100.0,
+            "precision": 0.78,
+            "recall": 0.1517509727626459,
+            "recall_ceiling": 0.19455252918287938,
+            "case_precision": 0.72
+          },
+          {
+            "day": 9.0,
+            "transactions": 208325.0,
+            "positives": 442.0,
+            "alerts": 100.0,
+            "precision": 0.92,
+            "recall": 0.2081447963800905,
+            "recall_ceiling": 0.22624434389140272,
+            "case_precision": 0.95
+          }
+        ]
+      },
+      "200": {
+        "k": 200.0,
+        "days": 2.0,
+        "precision": 0.755,
+        "recall": 0.3158995815899582,
+        "recall_ceiling": 0.41841004184100417,
+        "case_precision": 0.7025,
+        "case_recall": 0.3726790450928382,
+        "pattern_hit_rate": 0.7068965517241379,
+        "value_captured": 0.47946265471616656,
+        "per_day": [
+          {
+            "day": 8.0,
+            "transactions": 654467.0,
+            "positives": 514.0,
+            "alerts": 200.0,
+            "precision": 0.695,
+            "recall": 0.2704280155642023,
+            "recall_ceiling": 0.38910505836575876,
+            "case_precision": 0.615
+          },
+          {
+            "day": 9.0,
+            "transactions": 208325.0,
+            "positives": 442.0,
+            "alerts": 200.0,
+            "precision": 0.815,
+            "recall": 0.36877828054298645,
+            "recall_ceiling": 0.45248868778280543,
+            "case_precision": 0.79
+          }
+        ]
+      },
+      "500": {
+        "k": 500.0,
+        "days": 2.0,
+        "precision": 0.464,
+        "recall": 0.48535564853556484,
+        "recall_ceiling": 0.9853556485355649,
+        "case_precision": 0.393,
+        "case_recall": 0.5212201591511937,
+        "pattern_hit_rate": 0.896551724137931,
+        "value_captured": 0.6175862029193478,
+        "per_day": [
+          {
+            "day": 8.0,
+            "transactions": 654467.0,
+            "positives": 514.0,
+            "alerts": 500.0,
+            "precision": 0.448,
+            "recall": 0.4357976653696498,
+            "recall_ceiling": 0.9727626459143969,
+            "case_precision": 0.378
+          },
+          {
+            "day": 9.0,
+            "transactions": 208325.0,
+            "positives": 442.0,
+            "alerts": 500.0,
+            "precision": 0.48,
+            "recall": 0.5429864253393665,
+            "recall_ceiling": 1.0,
+            "case_precision": 0.408
+          }
+        ]
+      }
+    },
+    "online_regret_100": {
+      "days_evaluated": 1.0,
+      "oracle_precision": 0.92,
+      "live_precision": 0.9157894736842105,
+      "live_alerts_per_day": 95.0,
+      "true_positives_lost": 5.0
+    },
+    "threshold": 0.9958415627479553,
+    "minority_f1": {
+      "f1": 0.4818785094435937,
+      "precision": 0.47058823529411764,
+      "recall": 0.49372384937238495
+    },
+    "minority_f1_ci": {
+      "low": 0.4501458416388394,
+      "high": 0.512638737989114,
+      "se": 0.0188406275041362,
+      "n_boot": 30.0
+    },
+    "per_pattern": {
+      "BIPARTITE": {
+        "n": 44.0,
+        "recall": 0.7954545454545454
+      },
+      "CYCLE": {
+        "n": 55.0,
+        "recall": 0.7272727272727273
+      },
+      "FAN-IN": {
+        "n": 57.0,
+        "recall": 0.8070175438596491
+      },
+      "FAN-OUT": {
+        "n": 65.0,
+        "recall": 0.8923076923076924
+      },
+      "GATHER-SCATTER": {
+        "n": 127.0,
+        "recall": 0.8661417322834646
+      },
+      "RANDOM": {
+        "n": 43.0,
+        "recall": 0.7209302325581395
+      },
+      "SCATTER-GATHER": {
+        "n": 110.0,
+        "recall": 0.8727272727272727
+      },
+      "STACK": {
+        "n": 84.0,
+        "recall": 0.6190476190476191
+      },
+      "natural": {
+        "n": 371.0,
+        "recall": 0.01078167115902965
+      }
+    }
+  },
+  "arm": "G4",
+  "protocol": "P2",
+  "seed": 1,
+  "device": "cpu"
+}
