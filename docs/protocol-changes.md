@@ -23,3 +23,4 @@ Changes made after training began, all before the test set was evaluated, unless
 | The published GNN reproduction with IBM's own code was not run | It needs a GPU: the paper reports about 8 hours per PNA run on a V100. |
 | G2 and G3 gained seeds 1 and 2, and all GNN arms gained a calibration run | The claim about P1 and P2 shouldn't rest on one seed. It moved the full-volume gap from 42 vs 29 to 38.6 vs 30.7. These runs add 8 entries to the test ledger, with no settings changed. |
 | G1 and G4 also gained seeds 1 and 2 | To reach the three-seed minimum for every GNN arm. These runs add 4 more entries to the test ledger, with no settings changed. |
+| The live LLM evaluation and judge calibration have not been run | The first attempt stopped on the API's credit check, before any narrative was produced. The rule baseline and verifier results don't depend on it. |

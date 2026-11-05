@@ -19,6 +19,8 @@ from unravel.agent.scripted import ScriptedClient
 from unravel.agent.tools import Alert
 from unravel.api.settings import Settings
 
+CHECKPOINT_SETUP_LOCK = 7_203_114
+
 
 def make_client(settings: Settings) -> ModelClient:
     if settings.llm == "anthropic":
@@ -35,7 +37,17 @@ def connect(dsn: str) -> psycopg.Connection[dict[str, Any]]:
 def checkpointer(dsn: str) -> PostgresSaver:
     connection = psycopg.connect(dsn, autocommit=True, prepare_threshold=0, row_factory=dict_row)
     saver = PostgresSaver(connection)
-    saver.setup()
+    # The API and the worker start together, and concurrent setup collides on a fresh database.
+    # Poll instead of blocking: setup builds indexes concurrently, which waits for every running
+    # statement, including one blocked on this lock, and that would deadlock.
+    while not connection.execute(
+        "SELECT pg_try_advisory_lock(%s) AS locked", (CHECKPOINT_SETUP_LOCK,)
+    ).fetchone()["locked"]:  # type: ignore[index]
+        time.sleep(0.2)
+    try:
+        saver.setup()
+    finally:
+        connection.execute("SELECT pg_advisory_unlock(%s)", (CHECKPOINT_SETUP_LOCK,))
     return saver
 
 

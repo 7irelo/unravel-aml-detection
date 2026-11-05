@@ -84,3 +84,24 @@ def test_idle_ticks_let_a_reader_flush_partial_batches(fixture_paths: DatasetPat
         )
     )
     assert ticks == [(-1, b""), (-1, b"")]
+
+
+def test_checkpoint_setup_survives_concurrent_first_start() -> None:
+    """The API and the worker both set up the checkpointer when a fresh stack starts."""
+    from concurrent.futures import ThreadPoolExecutor
+    from uuid import uuid4
+
+    from unravel.api.cases import checkpointer
+
+    name = f"race_{uuid4().hex[:8]}"
+    with psycopg.connect(OWNER, autocommit=True) as admin:
+        admin.execute(f"CREATE DATABASE {name}")
+    dsn = OWNER.rsplit("/", 1)[0] + f"/{name}"
+    try:
+        with ThreadPoolExecutor(4) as pool:
+            savers = [f.result() for f in [pool.submit(checkpointer, dsn) for _ in range(4)]]
+        for saver in savers:
+            saver.conn.close()
+    finally:
+        with psycopg.connect(OWNER, autocommit=True) as admin:
+            admin.execute(f"DROP DATABASE {name} WITH (FORCE)")
